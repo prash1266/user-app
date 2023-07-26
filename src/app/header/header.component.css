@@ -1,0 +1,17 @@
+.header-flexbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.active {
+  background-color: rgb(69, 20, 161) !important;
+}

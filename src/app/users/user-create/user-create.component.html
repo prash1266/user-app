@@ -1,0 +1,90 @@
+<h2 class="center">{{ mode }} User</h2>
+<div class="container">
+  <mat-card class="card">
+    <div style="display: flex; justify-content: center">
+      <img
+        *ngIf="userForm.controls['name'].value; else placeholder"
+        style="position: absolute; transform: translate(0px, -50%)"
+        [src]="userAvatar"
+        alt="user_avatar"
+      />
+      <ng-template #placeholder>
+        <img
+          style="position: absolute; transform: translate(0px, -50%)"
+          src="assets/user.png"
+          alt="user_avatar"
+          height="80px"
+        />
+      </ng-template>
+    </div>
+    <mat-card-content style="padding-top: 80px">
+      <form [formGroup]="userForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-100 margin-bottom">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Name"
+            formControlName="name"
+            (input)="onNameInput($event)"
+          />
+          <mat-error *ngIf="userForm.controls['name'].hasError('required')">
+            <small>Name is required</small>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !userForm.controls['name'].hasError('required') &&
+              userForm.controls['name'].hasError('pattern')
+            "
+          >
+            <small>Please enter a valid name</small>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 margin-bottom">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="abc@email.com" formControlName="email" />
+          <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+            <small>Email is required</small>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !userForm.controls['email'].hasError('required') &&
+              userForm.controls['email'].hasError('email')
+            "
+          >
+            <small>Please enter a valid email</small>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 margin-bottom">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpicker"
+            [max]="maxDate"
+            formControlName="dob"
+          />
+          <mat-error *ngIf="userForm.controls['dob'].hasError('required')">
+            <small>Date of birth is required</small>
+          </mat-error>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="dpicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dpicker disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 margin-bottom">
+          <mat-select formControlName="country" placeholder="Select a Country">
+            <mat-option *ngFor="let country of countries" [value]="country.code"
+              >{{ country.code }}({{ country.name }})</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="userForm.controls['country'].hasError('required')">
+            <small>Please select a Country</small>
+          </mat-error>
+        </mat-form-field>
+        <div class="center" style="margin: 10px 0px">
+          <button mat-flat-button type="submit" color="primary">Save User Details</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

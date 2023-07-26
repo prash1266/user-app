@@ -1,0 +1,54 @@
+<h2 class="center">Users List</h2>
+<div class="container">
+  <div *ngIf="usersList.length" style="text-align: right">
+    <button mat-flat-button color="primary" (click)="convertJsonToXlsx()">
+      Export to Excel
+    </button>
+  </div>
+  <ng-container *ngIf="usersList.length; else noUsers">
+    <div class="flex-container">
+      <div *ngFor="let user of usersList; let i = index" class="flex-item">
+        <app-user-card
+          [userData]="user"
+          (editUser)="editUser(i)"
+        ></app-user-card>
+      </div>
+    </div>
+  </ng-container>
+  <!-- <div class="table-responsive">
+    <table
+      *ngIf="usersList.length; else noUsers"
+      mat-table
+      [dataSource]="usersList"
+    >
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{ column | uppercase }}</th>
+        <td mat-cell *matCellDef="let user; let i = index" [ngSwitch]="column">
+          <span *ngSwitchCase="'serial'">{{ i + 1 }}</span>
+          <img
+            *ngSwitchCase="'avatar'"
+            [src]="user[column]"
+            alt="user_avatar"
+          />
+          <span *ngSwitchCase="'name'" class="highlight" (click)="editUser(i)">{{ user.name }}</span>
+          <span *ngSwitchCase="'age'">{{ user.dob | age }}</span>
+          <button
+            mat-flat-button
+            *ngSwitchCase="'edit'"
+            color="primary"
+            class="center"
+            (click)="editUser(i)"
+          >
+            <mat-icon fontIcon="edit" style="margin: 0"></mat-icon>
+          </button>
+          <span *ngSwitchDefault>{{ user[column] }}</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+  </div> -->
+  <ng-template #noUsers>
+    <h4 class="center">No Users Available</h4>
+  </ng-template>
+</div>

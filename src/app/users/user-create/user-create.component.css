@@ -1,0 +1,36 @@
+.card {
+  width: 40%;
+  margin: 100px auto 0px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .card {
+    width: 40%;
+    margin: 40px auto 0px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .card {
+    width: 60%;
+    margin: 40px auto 0px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .card {
+    width: 80%;
+    margin: 40px auto 0px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .card {
+    width: 100%;
+    margin: 40px auto 0px;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
+}
